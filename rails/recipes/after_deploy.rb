@@ -9,6 +9,7 @@ node[:deploy].each do |application, deploy|
       require 'yaml'
       open("#{deploy[:deploy_to]}/shared/config/database.yml", 'a') { |f|
         f << deploy[:database][:append].to_hash.to_yaml.sub("!ruby/hash:Chef::Node::ImmutableMash","").sub("---","")
+        f << "\n"
       }
     end
 
