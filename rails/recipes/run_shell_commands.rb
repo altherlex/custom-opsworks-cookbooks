@@ -1,5 +1,4 @@
 include_recipe 'deploy'
-include_recipe 'nodejs'
 
 Chef::Log.info("******Running shell commands.******")
 
