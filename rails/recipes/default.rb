@@ -12,7 +12,7 @@ node[:deploy].each do |application, deploy|
   execute "bundle check --path=#{shared_path}/bundle || bundle install --binstubs #{shared_path}/bin --path #{shared_path}/bundle --deployment --without development test" do
     user deploy[:user]
     group deploy[:group]
-    cwd current_path
+    cwd deploy[:current_path]
     environment deploy[:environment_variables]
   end
 
