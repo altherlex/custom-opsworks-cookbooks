@@ -10,10 +10,10 @@ node[:deploy].each do |application, deploy|
 
   shared_path = "#{deploy[:deploy_to]}/shared"
   execute "bundle check --path=#{shared_path}/bundle || bundle install --binstubs #{shared_path}/bin --path #{shared_path}/bundle --deployment --without development test" do
-    user config[:user]
-    group config[:group]
+    user deploy[:user]
+    group deploy[:group]
     cwd current_path
-    environment config['environment_variables']
+    environment deploy[:environment_variables]
   end
 
 end
