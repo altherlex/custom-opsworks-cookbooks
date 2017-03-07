@@ -2,15 +2,17 @@ node[:deploy].each do |application, deploy|
   
   deploy = node[:deploy][application]
 
-  node[:run_shell_commands].each do |cmd|
+  node[:run_shell_commands].each do |config_cmd|
 
-    execute "running #{cmd}" do
+    execute "running: #{config_cmd}" do
       cwd deploy[:current_path]
-      user deploy[:user]
+
+      user config_cmd[:user]||deploy[:user]
       group deploy[:group]
+
       environment deploy[:environment_variables]
-      command cmd
-      action :run
+
+      command config_cmd[:name]
     end  
   end
 end
