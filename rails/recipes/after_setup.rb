@@ -12,6 +12,7 @@ Host git.rhsoftware.com.br
 
 EOF
     command "echo #{ssh_config} >> ~/.ssh/config"
-    user 'root'
+    user deploy[:user]
+    group deploy[:group]
   end
 end
