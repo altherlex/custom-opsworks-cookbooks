@@ -11,7 +11,7 @@ Host git.rhsoftware.com.br
   Port #{deploy['environment_variables']['GIT_PORT']}
 
 EOF
-    command "echo #{ssh_config} >> ~/.ssh/config"
+    command "echo -e '#{ssh_config}' >> /home/#{deploy[:user]}/.ssh/config"
     user deploy[:user]
     group deploy[:group]
   end
