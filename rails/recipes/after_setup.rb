@@ -1,7 +1,7 @@
 node[:deploy].each do |application, deploy|
   deploy = node[:deploy][application]
 
-  execute "Adding map to rh-soft git" do
+  execute 'Adding map to rh-soft git' do
 
     ssh_config=<<EOF
 
@@ -12,5 +12,6 @@ Host git.rhsoftware.com.br
 
 EOF
     command "echo #{ssh_config} >> ~/.ssh/config"
+    user 'root'
   end
 end
