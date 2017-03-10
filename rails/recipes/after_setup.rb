@@ -12,10 +12,11 @@ Host git.rhsoftware.com.br
 
 EOF
 
-    Chef::Log.info("@@@@@@@@@@@@@@@@@@@@@ echo -e \"#{ssh_config}\" >> /home/#{deploy[:user]}/.ssh/config")
+    cmd = "echo -e \"#{ssh_config}\" >> /home/#{deploy[:user]}/.ssh/config"
+    Chef::Log.info cmd
+    command cmd
 
-    command "echo -e \"#{ssh_config}\" >> /home/#{deploy[:user]}/.ssh/config"
-    user deploy[:user]
-    group deploy[:group]
+    # user deploy[:user]
+    # group deploy[:group]
   end
 end
