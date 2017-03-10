@@ -1,7 +1,6 @@
 include_recipe 'deploy'
 
 node[:deploy].each do |application, deploy|
-
   deploy = node[:deploy][application]
 
   ruby_block "append_to_database_yaml" do
@@ -12,6 +11,8 @@ node[:deploy].each do |application, deploy|
         f << "\n"
       }
     end
+
+    not_if "grep '#{deploy[:database][:append].keys.first.to_s}' #{deploy[:deploy_to]}/shared/config/database.yml"
 
     only_if do
       deploy[:database][:append].present? && File.directory?("#{deploy[:deploy_to]}/shared/config/")
