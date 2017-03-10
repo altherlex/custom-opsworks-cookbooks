@@ -8,10 +8,13 @@ node[:deploy].each do |application, deploy|
 Host git.rhsoftware.com.br
   Hostname git.rhsoftware.com.br
   User git
-  Port #{deploy['environment_variables']['GIT_PORT']}
+  Port #{deploy['environment_variables']['GIT_REPO_PORT']}
 
 EOF
-    command "echo -e '#{ssh_config}' >> /home/#{deploy[:user]}/.ssh/config"
+
+    Chef::Log.info("@@@@@@@@@@@@@@@@@@@@@ echo -e \"#{ssh_config}\" >> /home/#{deploy[:user]}/.ssh/config")
+
+    command "echo -e \"#{ssh_config}\" >> /home/#{deploy[:user]}/.ssh/config"
     user deploy[:user]
     group deploy[:group]
   end
