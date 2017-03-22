@@ -8,7 +8,8 @@ node[:deploy].each do |application, deploy|
     group deploy[:group]
     cwd "#{deploy[:deploy_to]}/current"
     environment deploy['environment_variables'].merge('RAILS_GROUPS' => 'assets')
+
+		not_if !deploy[:assets]
   end
 
-	not_if !deploy[:assets]
 end
