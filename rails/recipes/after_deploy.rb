@@ -14,6 +14,9 @@ node[:deploy].each do |application, deploy|
 
     # not_if "grep '#{deploy[:database][:append].keys.first.to_s}' #{deploy[:deploy_to]}/shared/config/database.yml"
 
+    Chef::Log.info deploy[:database][:append].inspect
+    Chef::Log.info File.directory?("#{deploy[:deploy_to]}/shared/config/").inspect
+
     # only_if do
     #   deploy[:database][:append].present? && File.directory?("#{deploy[:deploy_to]}/shared/config/")
     # end
