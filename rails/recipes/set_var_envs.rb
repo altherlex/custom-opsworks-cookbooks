@@ -17,7 +17,6 @@ bash "create_startup_env_config.sh" do
   code <<-EOH
     echo \''#{contents.join(" ")}\'' > startup_env_config.sh
     source startup_env_config.sh
-    cd #{release_path}
 
   EOH
 end
