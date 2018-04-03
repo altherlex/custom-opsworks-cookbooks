@@ -21,4 +21,11 @@ node[:deploy].each do |application, deploy|
     #   deploy[:database][:append].present? && File.directory?("#{deploy[:deploy_to]}/shared/config/")
     # end
   end
+
+  execute "./unicorn restart" do
+    user config[:user]
+    group config[:group]
+    cwd "#{deploy[:deploy_to]}/shared/scripts"
+    environment config['environment_variables']
+  end  
 end
