@@ -23,9 +23,9 @@ node[:deploy].each do |application, deploy|
   end
 
   execute "./unicorn restart" do
-    user config[:user]
-    group config[:group]
+    user deploy[:user]
+    group deploy[:group]
     cwd "#{deploy[:deploy_to]}/shared/scripts"
-    environment config['environment_variables']
+    environment deploy['environment_variables']
   end  
 end
