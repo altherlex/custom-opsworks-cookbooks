@@ -25,7 +25,7 @@ node[:deploy].each do |application, deploy|
   execute "unicorn_stopping" do
     user deploy[:user]
     group deploy[:group]
-    command "ps aux | grep 'unicorn' | awk '{print $2}' | xargs sudo kill -9"
+    command "ps aux | grep 'unicorn' | awk '{print $2}' | xargs sudo kill -9 | exit 1"
   end
 
   execute "unicorn_restarting" do
